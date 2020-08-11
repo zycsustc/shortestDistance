@@ -14,14 +14,22 @@ public class ShortestPathService {
     }
 
     public LinkedList<Vertex> getShortestPath(Vertex source, Vertex target, DijkstraAlgorithm dijkstraAlgorithm){
+        dijkstraAlgorithm.execute(source);
         if(source.equals(target)){
-            dijkstraAlgorithm.execute(source);
             return dijkstraAlgorithm.getShortestPathSameStartAndEnd(source, dijkstraAlgorithm);
         } else {
-            dijkstraAlgorithm.execute(source);
             return dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(target);
         }
     }
 
+    public ArrayList<LinkedList<Vertex>> getPathsWithConditionOnStops(Vertex source, Vertex target, DijkstraAlgorithm dijkstraAlgorithm,
+                                                                        String condition, int number){
+        dijkstraAlgorithm.execute(source);
+        if(source.equals(target)){
+            return dijkstraAlgorithm.getPathsByConditionOnStopsSameStartAndEnd(source, dijkstraAlgorithm, condition, number);
+        } else {
+            return null;
+        }
+    }
 
 }

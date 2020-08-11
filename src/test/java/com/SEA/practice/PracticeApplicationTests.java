@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -144,6 +145,20 @@ class PracticeApplicationTests {
 	}
 
 	@Test
+	void shouldReturnNumberOfRoutesFromCtoCWithMaximumThreeStops(){
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		Vertex source = shortestPathService.getVertexById("C", nodes);
+		Vertex target = shortestPathService.getVertexById("C", nodes);
+
+		ArrayList<LinkedList<Vertex>> paths = shortestPathService.getPathsWithConditionOnStops(source, target, dijkstra,
+				"Max", 3);
+
+		assertEquals(2, paths.size());
+	}
+
+	@Test
 	void shouldReturnShortestDistanceFromAtoC() {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
@@ -162,7 +177,6 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-
 		Vertex source = shortestPathService.getVertexById("B", nodes);
 		Vertex target = shortestPathService.getVertexById("B", nodes);
 
@@ -170,5 +184,31 @@ class PracticeApplicationTests {
 		int distance = dijkstra.getDistanceByPath(path);
 
 		assertEquals(9, distance);
+	}
+
+	@Test
+	void shouldFindAllPathsFromAtoCWithFourStops() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		Vertex source = shortestPathService.getVertexById("A", nodes);
+		Vertex target = shortestPathService.getVertexById("C", nodes);
+
+		dijkstra.getAllPathsWithExactStops(source, target, 4);
+
+		assertEquals(3, dijkstra.resultSet.size());
+	}
+
+	@Test
+	void shouldFindAllPathsFromCtoCWithMaxDistance30() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		Vertex source = shortestPathService.getVertexById("C", nodes);
+		Vertex target = shortestPathService.getVertexById("C", nodes);
+
+		dijkstra.getAllPathsWithMaxDistance(source, target, 30);
+
+		assertEquals(7, dijkstra.resultSet.size());
 	}
 }
