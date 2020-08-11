@@ -6,6 +6,7 @@ public class DijkstraAlgorithm {
 
     private final List<Vertex> nodes;
     private final List<Edge> edges;
+    private Vertex source;
     private Set<Vertex> settledNodes;
     private Set<Vertex> unSettledNodes;
     private Map<Vertex, Vertex> predecessors;
@@ -17,6 +18,7 @@ public class DijkstraAlgorithm {
     }
 
     public void execute(Vertex source) {
+        this.source = source;
         settledNodes = new HashSet<Vertex>();
         unSettledNodes = new HashSet<Vertex>();
         distance = new HashMap<Vertex, Integer>();
@@ -55,7 +57,7 @@ public class DijkstraAlgorithm {
         return Integer.MAX_VALUE;
     }
 
-    private List<Vertex> getNeighbors(Vertex node) {
+    public List<Vertex> getNeighbors(Vertex node) {
         List<Vertex> neighbors = new ArrayList<Vertex>();
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
@@ -64,6 +66,16 @@ public class DijkstraAlgorithm {
             }
         }
         return neighbors;
+    }
+
+    public List<Vertex> getAdjacentNodes(Vertex node) {
+        List<Vertex> adjacentNodes = new ArrayList<Vertex>();
+        for (Edge edge: edges) {
+            if(edge.getSource().equals(node)){
+                adjacentNodes.add(edge.getDestination());
+            }
+        }
+        return adjacentNodes;
     }
 
     private Vertex getMinimum(Set<Vertex> vertexes) {
@@ -86,17 +98,12 @@ public class DijkstraAlgorithm {
 
     private int getShortestDistance(Vertex destination) {
         Integer d = distance.get(destination);
-        if (d == null) {
-            return Integer.MAX_VALUE;
-        } else {
-            return d;
-        }
+        return Objects.requireNonNullElse(d, Integer.MAX_VALUE);
     }
 
-    public LinkedList<Vertex> getPath(Vertex target) {
+    public LinkedList<Vertex> getShortestPathDifferentStartAndEnd(Vertex target){
         LinkedList<Vertex> path = new LinkedList<Vertex>();
         Vertex step = target;
-        // check if a path exists
         if (predecessors.get(step) == null) {
             return null;
         }
@@ -105,9 +112,33 @@ public class DijkstraAlgorithm {
             step = predecessors.get(step);
             path.add(step);
         }
-        // Put it into the correct order
         Collections.reverse(path);
         return path;
+    }
+
+    public LinkedList<Vertex> getShortestPathSameStartAndEnd(Vertex source, DijkstraAlgorithm dijkstraAlgorithm){
+        LinkedList<Vertex> path = new LinkedList<Vertex>();
+        List<Vertex> adjacentNodes = getAdjacentNodes(source);
+        int minDistance = Integer.MAX_VALUE;
+        for(Vertex newStart: adjacentNodes){
+            dijkstraAlgorithm.execute(newStart);
+            if(dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(source)!=null){
+                LinkedList<Vertex> wholePath = dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(source);
+                wholePath.add(0, source);
+                int distance = getDistanceByPath(wholePath);
+                minDistance = Math.min(distance, minDistance);
+                path = minDistance==distance ? wholePath : path;
+            }
+        }
+        return path;
+    }
+
+    public LinkedList<Vertex> getShortestPath(Vertex source, Vertex target, DijkstraAlgorithm dijkstraAlgorithm){
+        if(source.equals(target)){
+            return dijkstraAlgorithm.getShortestPathSameStartAndEnd(source, dijkstraAlgorithm);
+        } else {
+            return dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(target);
+        }
     }
 
     public String getExactPath(LinkedList<Vertex> exactPath){
@@ -125,12 +156,12 @@ public class DijkstraAlgorithm {
         int distance = 0;
         Vertex nextNode;
         for (Vertex node: path) {
-            if(path.get(path.indexOf(node))!=path.getLast()){
-                nextNode = path.get(path.indexOf(node)+1);
-                distance += getDistance(node, nextNode);
+            nextNode = path.get(path.indexOf(node)+1);
+            distance += getDistance(node, nextNode);
+            if(nextNode.equals(path.getLast())){
+                return distance;
             }
         }
         return distance;
     }
-
 }

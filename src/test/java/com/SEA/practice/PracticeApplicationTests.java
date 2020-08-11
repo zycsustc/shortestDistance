@@ -142,4 +142,33 @@ class PracticeApplicationTests {
 		dijkstra.execute(path.getFirst());
 		assertEquals(dijkstra.getExactPath(path), "NO SUCH ROUTE");
 	}
+
+	@Test
+	void shouldReturnShortestDistanceFromAtoC() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		Vertex source = shortestPathService.getVertexById("A", nodes);
+		Vertex target = shortestPathService.getVertexById("C", nodes);
+
+		LinkedList<Vertex> path = shortestPathService.getShortestPath(source, target, dijkstra);
+		int distance = dijkstra.getDistanceByPath(path);
+
+		assertEquals(distance, 9);
+	}
+
+	@Test
+	void shouldReturnShortestDistanceFromBtoB() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+
+		Vertex source = shortestPathService.getVertexById("B", nodes);
+		Vertex target = shortestPathService.getVertexById("B", nodes);
+
+		LinkedList<Vertex> path = shortestPathService.getShortestPath(source, target, dijkstra);
+		int distance = dijkstra.getDistanceByPath(path);
+
+		assertEquals(9, distance);
+	}
 }
