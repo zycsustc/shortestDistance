@@ -24,6 +24,13 @@ class PracticeApplicationTests {
 		edges.add(lane);
 	}
 
+	private LinkedList<Vertex> getLinkedVertexByStops(ArrayList<String> stops){
+		LinkedList<Vertex> path = new LinkedList<>();
+		for(String stop: stops){
+			path.add(shortestPathService.getVertexById(stop, nodes));
+		}return path;
+	}
+
 	@BeforeEach
 	void setUp() {
 		nodes = new ArrayList<Vertex>();
@@ -57,14 +64,82 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		LinkedList<Vertex> path = new LinkedList<>();
-		path.add(shortestPathService.getVertexById("A", nodes));
-		path.add(shortestPathService.getVertexById("B", nodes));
-		path.add(shortestPathService.getVertexById("C", nodes));
+		ArrayList<String> stops = new ArrayList<>();
+		stops.add("A");
+		stops.add("B");
+		stops.add("C");
+		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
 
 		dijkstra.execute(path.getFirst());
 
 		assertEquals(dijkstra.getExactPath(path), "ROUTE FIND");
 		assertEquals(dijkstra.getDistanceByPath(path), 9);
+	}
+
+	@Test
+	void shouldReturnPathDistanceExactlyAtoD() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		ArrayList<String> stops = new ArrayList<>();
+		stops.add("A");
+		stops.add("D");
+		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+
+		dijkstra.execute(path.getFirst());
+
+		assertEquals(dijkstra.getExactPath(path), "ROUTE FIND");
+		assertEquals(dijkstra.getDistanceByPath(path), 5);
+	}
+
+	@Test
+	void shouldReturnPathDistanceExactlyAtoDtoC() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		ArrayList<String> stops = new ArrayList<>();
+		stops.add("A");
+		stops.add("D");
+		stops.add("C");
+		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+
+		dijkstra.execute(path.getFirst());
+
+		assertEquals(dijkstra.getExactPath(path), "ROUTE FIND");
+		assertEquals(dijkstra.getDistanceByPath(path), 13);
+	}
+
+	@Test
+	void shouldReturnPathDistanceExactlyAtoEtoBtoCtoD() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		ArrayList<String> stops = new ArrayList<>();
+		stops.add("A");
+		stops.add("E");
+		stops.add("B");
+		stops.add("C");
+		stops.add("D");
+		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+
+		dijkstra.execute(path.getFirst());
+
+		assertEquals(dijkstra.getExactPath(path), "ROUTE FIND");
+		assertEquals(dijkstra.getDistanceByPath(path), 22);
+	}
+
+    @Test
+	void shouldReturnRouteNotFoundMessageExactlyAtoEtoD() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		ArrayList<String> stops = new ArrayList<>();
+		stops.add("A");
+		stops.add("E");
+		stops.add("D");
+		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+
+		dijkstra.execute(path.getFirst());
+		assertEquals(dijkstra.getExactPath(path), "NO SUCH ROUTE");
 	}
 }
