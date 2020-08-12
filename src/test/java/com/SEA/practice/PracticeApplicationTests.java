@@ -16,19 +16,18 @@ class PracticeApplicationTests {
 
 	private List<Vertex> nodes;
 	private List<Edge> edges;
-
-	ShortestPathService shortestPathService = new ShortestPathService();
+	private final Util util = new Util();
 
 	private void addLane(String laneId, String sourceLoc, String destLoc, int cost) {
-		Edge lane = new Edge(laneId, shortestPathService.getVertexById(sourceLoc, nodes),
-				shortestPathService.getVertexById(destLoc, nodes), cost );
+		Edge lane = new Edge(laneId, util.getVertexById(sourceLoc, nodes),
+				util.getVertexById(destLoc, nodes), cost );
 		edges.add(lane);
 	}
 
 	private LinkedList<Vertex> getLinkedVertexByStops(ArrayList<String> stops){
 		LinkedList<Vertex> path = new LinkedList<>();
 		for(String stop: stops){
-			path.add(shortestPathService.getVertexById(stop, nodes));
+			path.add(util.getVertexById(stop, nodes));
 		}return path;
 	}
 
@@ -149,10 +148,9 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		Vertex source = shortestPathService.getVertexById("C", nodes);
-		Vertex target = shortestPathService.getVertexById("C", nodes);
+		Vertex source = util.getVertexById("C", nodes);
 
-		ArrayList<LinkedList<Vertex>> paths = shortestPathService.getPathsWithConditionOnStops(source, target, dijkstra,
+		ArrayList<LinkedList<Vertex>> paths = dijkstra.getPathsByConditionOnStopsSameStartAndEnd(source, dijkstra,
 				"Max", 3);
 
 		assertEquals(2, paths.size());
@@ -163,10 +161,12 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		Vertex source = shortestPathService.getVertexById("A", nodes);
-		Vertex target = shortestPathService.getVertexById("C", nodes);
+		Vertex source = util.getVertexById("A", nodes);
+		Vertex target = util.getVertexById("C", nodes);
 
-		LinkedList<Vertex> path = shortestPathService.getShortestPath(source, target, dijkstra);
+		dijkstra.execute(source);
+
+		LinkedList<Vertex> path = dijkstra.getShortestPathDifferentStartAndEnd(target);
 		int distance = dijkstra.getDistanceByPath(path);
 
 		assertEquals(distance, 9);
@@ -177,10 +177,9 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		Vertex source = shortestPathService.getVertexById("B", nodes);
-		Vertex target = shortestPathService.getVertexById("B", nodes);
+		Vertex source = util.getVertexById("B", nodes);
 
-		LinkedList<Vertex> path = shortestPathService.getShortestPath(source, target, dijkstra);
+		LinkedList<Vertex> path = dijkstra.getShortestPathSameStartAndEnd(source, dijkstra);
 		int distance = dijkstra.getDistanceByPath(path);
 
 		assertEquals(9, distance);
@@ -191,8 +190,8 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		Vertex source = shortestPathService.getVertexById("A", nodes);
-		Vertex target = shortestPathService.getVertexById("C", nodes);
+		Vertex source = util.getVertexById("A", nodes);
+		Vertex target = util.getVertexById("C", nodes);
 
 		dijkstra.getAllPathsWithExactStops(source, target, 4);
 
@@ -204,8 +203,8 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		Vertex source = shortestPathService.getVertexById("C", nodes);
-		Vertex target = shortestPathService.getVertexById("C", nodes);
+		Vertex source = util.getVertexById("C", nodes);
+		Vertex target = util.getVertexById("C", nodes);
 
 		dijkstra.getAllPathsWithMaxDistance(source, target, 30);
 

@@ -121,8 +121,8 @@ public class DijkstraAlgorithm {
         return path;
     }
 
-    private ArrayList<LinkedList<Vertex>> getPathsSameStartAndEnd(Vertex source, DijkstraAlgorithm dijkstraAlgorithm){
-        ArrayList<LinkedList<Vertex>> paths = new ArrayList<LinkedList<Vertex>>();
+    public ArrayList<LinkedList<Vertex>> getPathsSameStartAndEnd(Vertex source, DijkstraAlgorithm dijkstraAlgorithm){
+        ArrayList<LinkedList<Vertex>> paths = new ArrayList<>();
         List<Vertex> adjacentNodes = getAdjacentNodes(source);
         for(Vertex newStart: adjacentNodes){
             dijkstraAlgorithm.execute(newStart);
@@ -148,7 +148,7 @@ public class DijkstraAlgorithm {
     }
 
     public ArrayList<LinkedList<Vertex>> getPathsByConditionOnStopsSameStartAndEnd(
-            Vertex source, DijkstraAlgorithm dijkstraAlgorithm, String Condition, int number){
+            Vertex source, DijkstraAlgorithm dijkstraAlgorithm, String Condition, int number) {
         ArrayList<LinkedList<Vertex>> paths = getPathsSameStartAndEnd(source, dijkstraAlgorithm);
         ArrayList<LinkedList<Vertex>> result = new ArrayList<>();
         for(LinkedList<Vertex> path: paths){
