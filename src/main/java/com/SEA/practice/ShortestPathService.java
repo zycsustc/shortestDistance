@@ -7,9 +7,11 @@ import java.util.*;
 @Component
 public class ShortestPathService {
 
-    private List<Vertex> nodes;
-    private List<Edge> edges;
-    private Util util = new Util();
+    private final List<Vertex> nodes;
+    private final List<Edge> edges;
+    private Graph graph;
+    private final DijkstraAlgorithm dijkstraAlgorithm;
+    private final Util util = new Util();
 
     private void addLane(String laneId, String sourceLoc, String destLoc, int cost) {
         Edge lane = new Edge(laneId, util.getVertexById(sourceLoc, nodes), util.getVertexById(destLoc, nodes), cost );
@@ -42,26 +44,58 @@ public class ShortestPathService {
         addLane("Edge_7", "E", "B", 3);
         addLane("Edge_8", "A", "E", 7);
 
+        graph = new Graph(nodes, edges);
+        dijkstraAlgorithm = new DijkstraAlgorithm(graph);
+
         System.out.println("Test Data ready!");
     }
 
-    public LinkedList<Vertex> getShortestPath(Vertex source, Vertex target, DijkstraAlgorithm dijkstraAlgorithm){
-        dijkstraAlgorithm.execute(source);
+    public LinkedList<Vertex> getShortestPath(String source, String target){
+        Vertex sourceNode = util.getVertexById(source, nodes);
+        Vertex targetNode = util.getVertexById(target, nodes);
+        dijkstraAlgorithm.execute(sourceNode);
+
         if(source.equals(target)){
-            return dijkstraAlgorithm.getShortestPathSameStartAndEnd(source, dijkstraAlgorithm);
+            return dijkstraAlgorithm.getShortestPathSameStartAndEnd(sourceNode, dijkstraAlgorithm);
         } else {
-            return dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(target);
+            return dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(targetNode);
         }
     }
 
-    public ArrayList<LinkedList<Vertex>> getPathsWithConditionOnStops(Vertex source, Vertex target, DijkstraAlgorithm dijkstraAlgorithm,
-                                                                        String condition, int number){
-        dijkstraAlgorithm.execute(source);
+    public String getDistanceOfExactPath(List<String> stops){
+        LinkedList<Vertex> path = util.getLinkedVertexByStops(stops, nodes);
+        dijkstraAlgorithm.execute(path.getFirst());
+        String result = dijkstraAlgorithm.getExactPath(path);
+        return result.equals("ROUTE FIND") ? String.valueOf(dijkstraAlgorithm.getDistanceByPath(path)) : result;
+    }
+
+    public Set<String> getAllPathsWithExactStops(String source, String target, int stops) {
+        Vertex sourceNode = util.getVertexById(source, nodes);
+        Vertex targetNode = util.getVertexById(target, nodes);
+
+        dijkstraAlgorithm.getAllPathsWithExactStops(sourceNode, targetNode, stops);
+        return dijkstraAlgorithm.resultSet;
+    }
+
+    public ArrayList<LinkedList<Vertex>> getPathsWithConditionOnStops(
+            String source, String target, String condition, int number) {
+        Vertex sourceNode = util.getVertexById(source, nodes);
+        Vertex targetNode = util.getVertexById(target, nodes);
+
+        dijkstraAlgorithm.execute(sourceNode);
         if(source.equals(target)){
-            return dijkstraAlgorithm.getPathsByConditionOnStopsSameStartAndEnd(source, dijkstraAlgorithm, condition, number);
+            return dijkstraAlgorithm.getPathsByConditionOnStopsSameStartAndEnd(sourceNode, dijkstraAlgorithm, condition, number);
         } else {
             return null;
         }
+    }
+
+    public Set<String> getPathsWithMaxDistance(String source, String target, int maxDistance) {
+        Vertex sourceNode = util.getVertexById(source, nodes);
+        Vertex targetNode = util.getVertexById(target, nodes);
+
+        dijkstraAlgorithm.getAllPathsWithMaxDistance(sourceNode, targetNode, maxDistance);
+        return dijkstraAlgorithm.resultSet;
     }
 
 }

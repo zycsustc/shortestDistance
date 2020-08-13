@@ -14,7 +14,7 @@ public class DijkstraAlgorithm {
     private LinkedList<Vertex> visitedList = new LinkedList<>();
     public Set<String> resultSet = new HashSet<String>();
     public ArrayList<LinkedList<Vertex>> resultPaths = new ArrayList<>();
-    private Set<Edge> loopList = new HashSet<Edge>();
+    private final Set<Edge> loopList = new HashSet<Edge>();
 
 
     public DijkstraAlgorithm(Graph graph) {
@@ -139,6 +139,9 @@ public class DijkstraAlgorithm {
         int minDistance = Integer.MAX_VALUE;
         LinkedList<Vertex> shortestPath = new LinkedList<>();
         ArrayList<LinkedList<Vertex>> paths = getPathsSameStartAndEnd(source, dijkstraAlgorithm);
+        if(!(paths.size()>0)){
+            return null;
+        }
         for(LinkedList<Vertex> path: paths){
                 int distance = getDistanceByPath(path);
                 minDistance = Math.min(distance, minDistance);

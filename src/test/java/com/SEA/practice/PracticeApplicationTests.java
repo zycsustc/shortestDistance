@@ -24,17 +24,10 @@ class PracticeApplicationTests {
 		edges.add(lane);
 	}
 
-	private LinkedList<Vertex> getLinkedVertexByStops(ArrayList<String> stops){
-		LinkedList<Vertex> path = new LinkedList<>();
-		for(String stop: stops){
-			path.add(util.getVertexById(stop, nodes));
-		}return path;
-	}
-
 	@BeforeEach
 	void setUp() {
-		nodes = new ArrayList<Vertex>();
-		edges = new ArrayList<Edge>();
+		nodes = new ArrayList<>();
+		edges = new ArrayList<>();
 
 		ArrayList<String> vertexs = new ArrayList<>();
 		vertexs.add("A");
@@ -68,7 +61,7 @@ class PracticeApplicationTests {
 		stops.add("A");
 		stops.add("B");
 		stops.add("C");
-		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+		LinkedList<Vertex> path = util.getLinkedVertexByStops(stops, nodes);
 
 		dijkstra.execute(path.getFirst());
 
@@ -84,7 +77,7 @@ class PracticeApplicationTests {
 		ArrayList<String> stops = new ArrayList<>();
 		stops.add("A");
 		stops.add("D");
-		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+		LinkedList<Vertex> path = util.getLinkedVertexByStops(stops, nodes);
 
 		dijkstra.execute(path.getFirst());
 
@@ -101,7 +94,7 @@ class PracticeApplicationTests {
 		stops.add("A");
 		stops.add("D");
 		stops.add("C");
-		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+		LinkedList<Vertex> path = util.getLinkedVertexByStops(stops, nodes);
 
 		dijkstra.execute(path.getFirst());
 
@@ -120,7 +113,7 @@ class PracticeApplicationTests {
 		stops.add("B");
 		stops.add("C");
 		stops.add("D");
-		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+		LinkedList<Vertex> path = util.getLinkedVertexByStops(stops, nodes);
 
 		dijkstra.execute(path.getFirst());
 
@@ -137,7 +130,7 @@ class PracticeApplicationTests {
 		stops.add("A");
 		stops.add("E");
 		stops.add("D");
-		LinkedList<Vertex> path = getLinkedVertexByStops(stops);
+		LinkedList<Vertex> path = util.getLinkedVertexByStops(stops, nodes);
 
 		dijkstra.execute(path.getFirst());
 		assertEquals(dijkstra.getExactPath(path), "NO SUCH ROUTE");
@@ -209,5 +202,21 @@ class PracticeApplicationTests {
 		dijkstra.getAllPathsWithMaxDistance(source, target, 30);
 
 		assertEquals(7, dijkstra.resultSet.size());
+	}
+
+	@Test
+	void shouldTest() {
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+		Vertex source = util.getVertexById("A", nodes);
+		Vertex target = util.getVertexById("A", nodes);
+
+		LinkedList<Vertex> path = dijkstra.getShortestPathSameStartAndEnd(source, dijkstra);
+		if(path == null){
+			System.out.println("null met");
+		} else {
+			System.out.println(path.toString());
+		}
 	}
 }
