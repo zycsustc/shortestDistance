@@ -143,7 +143,7 @@ class PracticeApplicationTests {
 
 		Vertex source = util.getVertexById("C", nodes);
 
-		ArrayList<LinkedList<Vertex>> paths = dijkstra.getPathsByConditionOnStopsSameStartAndEnd(source, dijkstra,
+		ArrayList<String> paths = dijkstra.getPathsByConditionOnStopsSameStartAndEnd(source, dijkstra,
 				"Max", 3);
 
 		assertEquals(2, paths.size());
@@ -188,7 +188,7 @@ class PracticeApplicationTests {
 
 		dijkstra.getAllPathsWithExactStops(source, target, 4);
 
-		assertEquals(3, dijkstra.resultSet.size());
+		assertEquals(3, dijkstra.resultPaths.size());
 	}
 
 	@Test

@@ -13,7 +13,7 @@ public class DijkstraAlgorithm {
     private Map<Vertex, Integer> distance;
     private LinkedList<Vertex> visitedList = new LinkedList<>();
     public Set<String> resultSet = new HashSet<String>();
-    public ArrayList<LinkedList<Vertex>> resultPaths = new ArrayList<>();
+    public ArrayList<String> resultPaths = new ArrayList<>();
     private final Set<Edge> loopList = new HashSet<Edge>();
 
 
@@ -150,19 +150,19 @@ public class DijkstraAlgorithm {
         return shortestPath;
     }
 
-    public ArrayList<LinkedList<Vertex>> getPathsByConditionOnStopsSameStartAndEnd(
+    public ArrayList<String> getPathsByConditionOnStopsSameStartAndEnd(
             Vertex source, DijkstraAlgorithm dijkstraAlgorithm, String Condition, int number) {
         ArrayList<LinkedList<Vertex>> paths = getPathsSameStartAndEnd(source, dijkstraAlgorithm);
-        ArrayList<LinkedList<Vertex>> result = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
         for(LinkedList<Vertex> path: paths){
             switch (Condition){
                 case "Equal":
-                    if(path.size()==number){
-                        result.add(path);
+                    if(path.size()==number+1){
+                        result.add(path.toString());
                     }
                 case "Max":
                     if(path.size()<=number+1){
-                        result.add(path);
+                        result.add(path.toString());
                     }
             }
         }
@@ -203,7 +203,7 @@ public class DijkstraAlgorithm {
         for (Edge edge : edges) {
             if (edge.getSource().equals(startNode)) {
                 if (edge.getDestination().equals(endNode) && visitedList.size() == stops) {
-                    resultSet.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + "," + endNode + "]");
+                    resultPaths.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endNode + "]");
                     continue;
                 }
                 if (visitedList.size()<=stops) {

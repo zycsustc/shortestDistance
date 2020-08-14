@@ -77,7 +77,7 @@ public class ShortestPathService {
         return dijkstraAlgorithm.resultSet;
     }
 
-    public ArrayList<LinkedList<Vertex>> getPathsWithConditionOnStops(
+    public ArrayList<String> getPathsWithConditionOnStops(
             String source, String target, String condition, int number) {
         Vertex sourceNode = util.getVertexById(source, nodes);
         Vertex targetNode = util.getVertexById(target, nodes);
@@ -86,7 +86,9 @@ public class ShortestPathService {
         if(source.equals(target)){
             return dijkstraAlgorithm.getPathsByConditionOnStopsSameStartAndEnd(sourceNode, dijkstraAlgorithm, condition, number);
         } else {
-            return null;
+            // need to implement paths with maximum number of stops
+            dijkstraAlgorithm.getAllPathsWithExactStops(sourceNode, targetNode, number);
+            return new ArrayList(dijkstraAlgorithm.resultPaths);
         }
     }
 
