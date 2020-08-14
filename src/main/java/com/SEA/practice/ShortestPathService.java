@@ -97,12 +97,13 @@ public class ShortestPathService {
         }
     }
 
-    public Set<String> getPathsWithMaxDistance(String source, String target, int maxDistance) {
+    public ArrayList<String> getPathsWithMaxDistance(String source, String target, int maxDistance) {
         Vertex sourceNode = util.getVertexById(source, nodes);
         Vertex targetNode = util.getVertexById(target, nodes);
 
+        dijkstraAlgorithm.resultPaths = new ArrayList<>();
         dijkstraAlgorithm.getAllPathsWithMaxDistance(sourceNode, targetNode, maxDistance);
-        return dijkstraAlgorithm.resultSet;
+        return dijkstraAlgorithm.resultPaths;
     }
 
 }

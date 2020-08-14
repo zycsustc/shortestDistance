@@ -126,7 +126,7 @@ class PracticeApplicationTests {
 	}
 
     @Test
-	void shouldReturnRouteNotFoundMessageExactlyAtoEtoD() {
+	void shouldReturnNoSuchRouteMessageExactlyAtoEtoD() {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
@@ -205,19 +205,6 @@ class PracticeApplicationTests {
 
 		dijkstra.getAllPathsWithMaxDistance(source, target, 30);
 
-		assertEquals(7, dijkstra.resultSet.size());
-	}
-
-	@Test
-	void shouldTest() {
-		Graph graph = new Graph(nodes, edges);
-		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-
-		Vertex source = util.getVertexById("C", nodes);
-		Vertex target = util.getVertexById("C", nodes);
-
-		dijkstra.execute(source);
-		dijkstra.getAllPathsWithExactStops(source, target, 4);
-		System.out.println(dijkstra.resultPaths);
+		assertEquals(7, dijkstra.resultPaths.size());
 	}
 }

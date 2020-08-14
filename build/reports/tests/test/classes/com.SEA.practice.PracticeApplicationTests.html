@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">11</div>
+<div class="counter">10</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.409s</div>
+<div class="counter">0.526s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,22 +79,27 @@
 </thead>
 <tr>
 <td class="success">shouldFindAllPathsFromAtoCWithFourStops()</td>
-<td class="success">0.004s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldFindAllPathsFromCtoCWithMaxDistance30()</td>
-<td class="success">0.365s</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnNoSuchRouteMessageExactlyAtoEtoD()</td>
+<td class="success">0.493s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnNumberOfRoutesFromCtoCWithMaximumThreeStops()</td>
-<td class="success">0.008s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnPathDistanceExactlyAtoBtoC()</td>
-<td class="success">0.006s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -104,16 +109,11 @@
 </tr>
 <tr>
 <td class="success">shouldReturnPathDistanceExactlyAtoDtoC()</td>
-<td class="success">0.003s</td>
+<td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnPathDistanceExactlyAtoEtoBtoCtoD()</td>
-<td class="success">0.008s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">shouldReturnRouteNotFoundMessageExactlyAtoEtoD()</td>
 <td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
@@ -127,34 +127,29 @@
 <td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
-<tr>
-<td class="success">shouldTest()</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
 </table>
 </div>
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>11:43:57.688 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-11:43:57.704 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-11:43:57.730 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.SEA.practice.PracticeApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-11:43:57.744 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.SEA.practice.PracticeApplicationTests], using SpringBootContextLoader
-11:43:57.748 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.SEA.practice.PracticeApplicationTests]: class path resource [com/SEA/practice/PracticeApplicationTests-context.xml] does not exist
-11:43:57.749 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.SEA.practice.PracticeApplicationTests]: class path resource [com/SEA/practice/PracticeApplicationTestsContext.groovy] does not exist
-11:43:57.749 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.SEA.practice.PracticeApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-11:43:57.750 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.SEA.practice.PracticeApplicationTests]: PracticeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-11:43:57.788 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.SEA.practice.PracticeApplicationTests]
-11:43:57.851 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/zycsustc/workspace/shortestDistance/build/classes/java/main/com/SEA/practice/PracticeApplication.class]
-11:43:57.862 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.SEA.practice.PracticeApplication for test class com.SEA.practice.PracticeApplicationTests
-11:43:57.960 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.SEA.practice.PracticeApplicationTests]: using defaults.
-11:43:57.961 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-11:43:57.975 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
-11:43:57.975 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
-11:43:57.976 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14fc452b, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3a2d0736, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@28be4dab, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@110e1ff2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@672dc5e5, org.springframework.test.context.event.EventPublishingTestExecutionListener@35eb6a81, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6f62ba82, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@e72d913, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@77937d5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6928ead9, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1364ebd4, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@b4612ea]
-11:43:57.979 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@35bb4b3f testClass = PracticeApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5e53fb7d testClass = PracticeApplicationTests, locations = '{}', classes = '{class com.SEA.practice.PracticeApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5b74578d, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@94793db, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@487d71cd, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6ab5705c, org.springframework.boot.test.context.SpringBootTestArgs@1], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
-11:43:58.007 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+<pre>13:20:46.650 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+13:20:46.671 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+13:20:46.709 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.SEA.practice.PracticeApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+13:20:46.741 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.SEA.practice.PracticeApplicationTests], using SpringBootContextLoader
+13:20:46.746 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.SEA.practice.PracticeApplicationTests]: class path resource [com/SEA/practice/PracticeApplicationTests-context.xml] does not exist
+13:20:46.747 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.SEA.practice.PracticeApplicationTests]: class path resource [com/SEA/practice/PracticeApplicationTestsContext.groovy] does not exist
+13:20:46.747 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.SEA.practice.PracticeApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+13:20:46.748 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.SEA.practice.PracticeApplicationTests]: PracticeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:20:46.794 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.SEA.practice.PracticeApplicationTests]
+13:20:46.876 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/zycsustc/workspace/shortestDistance/build/classes/java/main/com/SEA/practice/PracticeApplication.class]
+13:20:46.892 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.SEA.practice.PracticeApplication for test class com.SEA.practice.PracticeApplicationTests
+13:20:47.008 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.SEA.practice.PracticeApplicationTests]: using defaults.
+13:20:47.009 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+13:20:47.024 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+13:20:47.025 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+13:20:47.025 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@36ba2221, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@393fe381, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4735eb3e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@4a27d109, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2deb4946, org.springframework.test.context.event.EventPublishingTestExecutionListener@6b0e9491, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@30aeed5, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@7751d824, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@71ef1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1fb2a87c, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@4b9a9119, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3273f0b6]
+13:20:47.030 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@6673cf1f testClass = PracticeApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@4530b79c testClass = PracticeApplicationTests, locations = '{}', classes = '{class com.SEA.practice.PracticeApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@7667397e, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@3e37b057, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@4e139ee3, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d6aac25, org.springframework.boot.test.context.SpringBootTestArgs@1], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+13:20:47.058 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -164,13 +159,12 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.3.2.RELEASE)
 
-2020-08-14 11:43:58.426  INFO 39466 --- [    Test worker] c.SEA.practice.PracticeApplicationTests  : Starting PracticeApplicationTests on yichis-MacBook-Pro.local with PID 39466 (started by zycsustc in /Users/zycsustc/workspace/shortestDistance)
-2020-08-14 11:43:58.428  INFO 39466 --- [    Test worker] c.SEA.practice.PracticeApplicationTests  : No active profile set, falling back to default profiles: default
+2020-08-14 13:20:47.426  INFO 40272 --- [    Test worker] c.SEA.practice.PracticeApplicationTests  : Starting PracticeApplicationTests on yichis-MacBook-Pro.local with PID 40272 (started by zycsustc in /Users/zycsustc/workspace/shortestDistance)
+2020-08-14 13:20:47.428  INFO 40272 --- [    Test worker] c.SEA.practice.PracticeApplicationTests  : No active profile set, falling back to default profiles: default
 Test Data ready!
 Test Data ready!
-2020-08-14 11:43:59.429  INFO 39466 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-08-14 11:43:59.669  INFO 39466 --- [    Test worker] c.SEA.practice.PracticeApplicationTests  : Started PracticeApplicationTests in 1.651 seconds (JVM running for 2.901)
-[[C, D, C, D, C], [C, D, E, B, C]]
+2020-08-14 13:20:48.657  INFO 40272 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-14 13:20:48.924  INFO 40272 --- [    Test worker] c.SEA.practice.PracticeApplicationTests  : Started PracticeApplicationTests in 1.854 seconds (JVM running for 3.665)
 </pre>
 </span>
 </div>
@@ -182,7 +176,7 @@ Test Data ready!
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 6.4.1</a> at Aug 14, 2020, 11:44:00 AM</p>
+<a href="http://www.gradle.org">Gradle 6.4.1</a> at Aug 14, 2020, 1:20:49 PM</p>
 </div>
 </div>
 </body>

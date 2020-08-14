@@ -218,7 +218,7 @@ public class DijkstraAlgorithm {
             for (Edge edge : edges) {
                 if (edge.getSource().equals(startNode)) {
                     if (edge.getDestination().equals(endNode) && distance+edge.getWeight()<maxDistance) {
-                        resultSet.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endNode + "]");
+                        resultPaths.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endNode + "]");
                     }
                     getAllPathsWithMaxDistance(edge.getDestination(), endNode, maxDistance);
                 }
