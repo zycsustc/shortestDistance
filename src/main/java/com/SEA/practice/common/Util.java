@@ -1,6 +1,7 @@
-package com.SEA.practice;
+package com.SEA.practice.common;
 
-import java.util.ArrayList;
+import com.SEA.practice.modules.Vertex;
+
 import java.util.LinkedList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.SEA.practice;
+package com.SEA.practice.modules;
 
 import java.util.*;
 
@@ -12,9 +12,8 @@ public class DijkstraAlgorithm {
     private Map<Vertex, Vertex> predecessors;
     private Map<Vertex, Integer> distance;
     private LinkedList<Vertex> visitedList = new LinkedList<>();
-    public Set<String> resultSet = new HashSet<String>();
+    public Set<String> resultSet = new HashSet<>();
     public ArrayList<String> resultPaths = new ArrayList<>();
-    private final Set<Edge> loopList = new HashSet<Edge>();
 
 
     public DijkstraAlgorithm(Graph graph) {
@@ -152,21 +151,19 @@ public class DijkstraAlgorithm {
 
     public ArrayList<String> getPathsByConditionOnStopsSameStartAndEnd(
             Vertex source, DijkstraAlgorithm dijkstraAlgorithm, String Condition, int number) {
-        ArrayList<LinkedList<Vertex>> paths = getPathsSameStartAndEnd(source, dijkstraAlgorithm);
-        ArrayList<String> result = new ArrayList<>();
-        for(LinkedList<Vertex> path: paths){
-            switch (Condition){
-                case "Equal":
-                    if(path.size()==number+1){
-                        result.add(path.toString());
-                    }
-                case "Max":
-                    if(path.size()<=number+1){
-                        result.add(path.toString());
-                    }
+        if(Condition.equals("Equal")){
+            dijkstraAlgorithm.getAllPathsWithExactStops(source, source, number);
+            return dijkstraAlgorithm.resultPaths;
+        } else {
+            ArrayList<LinkedList<Vertex>> paths = getPathsSameStartAndEnd(source, dijkstraAlgorithm);
+            ArrayList<String> result = new ArrayList<>();
+            for(LinkedList<Vertex> path: paths){
+                if(path.size()<=number+1){
+                    result.add(path.toString());
+                }
             }
+            return result;
         }
-        return result;
     }
 
     public String getExactPath(LinkedList<Vertex> exactPath){
@@ -208,8 +205,6 @@ public class DijkstraAlgorithm {
                 }
                 if (visitedList.size()<=stops) {
                     getAllPathsWithExactStops(edge.getDestination(), endNode, stops);
-                } else {
-                    loopList.add(edge);
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.SEA.practice;
+package com.SEA.practice.modules;
 
 public class Vertex {
     final private String id;

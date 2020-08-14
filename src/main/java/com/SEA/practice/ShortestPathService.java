@@ -1,5 +1,10 @@
 package com.SEA.practice;
 
+import com.SEA.practice.common.Util;
+import com.SEA.practice.modules.DijkstraAlgorithm;
+import com.SEA.practice.modules.Edge;
+import com.SEA.practice.modules.Graph;
+import com.SEA.practice.modules.Vertex;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -69,26 +74,26 @@ public class ShortestPathService {
         return result.equals("ROUTE FIND") ? String.valueOf(dijkstraAlgorithm.getDistanceByPath(path)) : result;
     }
 
-    public Set<String> getAllPathsWithExactStops(String source, String target, int stops) {
-        Vertex sourceNode = util.getVertexById(source, nodes);
-        Vertex targetNode = util.getVertexById(target, nodes);
-
-        dijkstraAlgorithm.getAllPathsWithExactStops(sourceNode, targetNode, stops);
-        return dijkstraAlgorithm.resultSet;
-    }
-
     public ArrayList<String> getPathsWithConditionOnStops(
             String source, String target, String condition, int number) {
         Vertex sourceNode = util.getVertexById(source, nodes);
         Vertex targetNode = util.getVertexById(target, nodes);
 
         dijkstraAlgorithm.execute(sourceNode);
+        dijkstraAlgorithm.resultPaths = new ArrayList<>();
+
         if(source.equals(target)){
             return dijkstraAlgorithm.getPathsByConditionOnStopsSameStartAndEnd(sourceNode, dijkstraAlgorithm, condition, number);
         } else {
-            // need to implement paths with maximum number of stops
-            dijkstraAlgorithm.getAllPathsWithExactStops(sourceNode, targetNode, number);
-            return new ArrayList(dijkstraAlgorithm.resultPaths);
+            // need to implement paths with maximum number of stops when source and target are different
+            if(condition.equals("Equal")){
+                dijkstraAlgorithm.getAllPathsWithExactStops(sourceNode, targetNode, number);
+                return dijkstraAlgorithm.resultPaths;
+            } else {
+                ArrayList<String> result = new ArrayList<>();
+                result.add("Didn't implement max stops with different start and end city yet, sorry!");
+                return result;
+            }
         }
     }
 

@@ -1,5 +1,10 @@
 package com.SEA.practice;
 
+import com.SEA.practice.common.Util;
+import com.SEA.practice.modules.DijkstraAlgorithm;
+import com.SEA.practice.modules.Edge;
+import com.SEA.practice.modules.Graph;
+import com.SEA.practice.modules.Vertex;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -209,14 +213,11 @@ class PracticeApplicationTests {
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
-		Vertex source = util.getVertexById("A", nodes);
-		Vertex target = util.getVertexById("A", nodes);
+		Vertex source = util.getVertexById("C", nodes);
+		Vertex target = util.getVertexById("C", nodes);
 
-		LinkedList<Vertex> path = dijkstra.getShortestPathSameStartAndEnd(source, dijkstra);
-		if(path == null){
-			System.out.println("null met");
-		} else {
-			System.out.println(path.toString());
-		}
+		dijkstra.execute(source);
+		dijkstra.getAllPathsWithExactStops(source, target, 4);
+		System.out.println(dijkstra.resultPaths);
 	}
 }
