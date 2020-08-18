@@ -5,7 +5,7 @@ import com.SEA.practice.modules.Vertex;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Util {
+public class GraphUtil {
 
     public Vertex getVertexById(String id, List<Vertex> nodes) {
         for (Vertex node : nodes) {
