@@ -5,11 +5,11 @@ import java.util.*;
 public class DijkstraAlgorithm {
 
     private final Graph graph;
-    private Set<Vertex> settledNodes;
-    private Set<Vertex> unSettledNodes;
+    private Set<Vertex> settledVertices;
+    private Set<Vertex> unSettledVertices;
     private Map<Vertex, Vertex> predecessors;
     private Map<Vertex, Integer> distance;
-    private LinkedList<Vertex> visitedList = new LinkedList<>();
+    private final LinkedList<Vertex> visitedList = new LinkedList<>();
     public ArrayList<String> resultPaths = new ArrayList<>();
 
     public DijkstraAlgorithm(Graph graph) {
@@ -17,37 +17,37 @@ public class DijkstraAlgorithm {
     }
 
     public void execute(Vertex source) {
-        settledNodes = new HashSet<>();
-        unSettledNodes = new HashSet<>();
+        settledVertices = new HashSet<>();
+        unSettledVertices = new HashSet<>();
         distance = new HashMap<>();
         predecessors = new HashMap<>();
         distance.put(source, 0);
-        unSettledNodes.add(source);
-        while (unSettledNodes.size() > 0) {
-            Vertex node = getMinimum(unSettledNodes);
-            settledNodes.add(node);
-            unSettledNodes.remove(node);
-            findMinimalDistances(node);
+        unSettledVertices.add(source);
+        while (unSettledVertices.size() > 0) {
+            Vertex vertex = getMinimum(unSettledVertices);
+            settledVertices.add(vertex);
+            unSettledVertices.remove(vertex);
+            findMinimalDistances(vertex);
         }
     }
 
-    private void findMinimalDistances(Vertex node) {
-        List<Vertex> adjacentNodes = getNeighbors(node);
-        for (Vertex target : adjacentNodes) {
-            if (getShortestDistance(target) > getShortestDistance(node)
-                    + getDistance(node, target)) {
-                distance.put(target, getShortestDistance(node)
-                        + getDistance(node, target));
-                predecessors.put(target, node);
-                unSettledNodes.add(target);
+    private void findMinimalDistances(Vertex vertex) {
+        List<Vertex> adjacentVertices = getNeighbors(vertex);
+        for (Vertex target : adjacentVertices) {
+            if (getShortestDistance(target) > getShortestDistance(vertex)
+                    + getDistance(vertex, target)) {
+                distance.put(target, getShortestDistance(vertex)
+                        + getDistance(vertex, target));
+                predecessors.put(target, vertex);
+                unSettledVertices.add(target);
             }
         }
 
     }
 
-    private int getDistance(Vertex node, Vertex target) {
+    private int getDistance(Vertex vertex, Vertex target) {
         for (Edge edge : graph.getEdges()) {
-            if (edge.getSource().equals(node)
+            if (edge.getSource().equals(vertex)
                     && edge.getDestination().equals(target)) {
                 return edge.getWeight();
             }
@@ -55,10 +55,10 @@ public class DijkstraAlgorithm {
         return Integer.MAX_VALUE;
     }
 
-    public List<Vertex> getNeighbors(Vertex node) {
+    public List<Vertex> getNeighbors(Vertex vertex) {
         List<Vertex> neighbors = new ArrayList<>();
         for (Edge edge : graph.getEdges()) {
-            if (edge.getSource().equals(node)
+            if (edge.getSource().equals(vertex)
                     && !isSettled(edge.getDestination())) {
                 neighbors.add(edge.getDestination());
             }
@@ -66,14 +66,14 @@ public class DijkstraAlgorithm {
         return neighbors;
     }
 
-    public List<Vertex> getAdjacentNodes(Vertex node) {
-        List<Vertex> adjacentNodes = new ArrayList<>();
+    public List<Vertex> getAdjacentVertices(Vertex vertex) {
+        List<Vertex> adjacentVertices = new ArrayList<>();
         for (Edge edge : graph.getEdges()) {
-            if (edge.getSource().equals(node)) {
-                adjacentNodes.add(edge.getDestination());
+            if (edge.getSource().equals(vertex)) {
+                adjacentVertices.add(edge.getDestination());
             }
         }
-        return adjacentNodes;
+        return adjacentVertices;
     }
 
     private Vertex getMinimum(Set<Vertex> vertexes) {
@@ -91,7 +91,7 @@ public class DijkstraAlgorithm {
     }
 
     private boolean isSettled(Vertex vertex) {
-        return settledNodes.contains(vertex);
+        return settledVertices.contains(vertex);
     }
 
     private int getShortestDistance(Vertex destination) {
@@ -116,8 +116,8 @@ public class DijkstraAlgorithm {
 
     public ArrayList<LinkedList<Vertex>> getPathsSameStartAndEnd(Vertex source, DijkstraAlgorithm dijkstraAlgorithm) {
         ArrayList<LinkedList<Vertex>> paths = new ArrayList<>();
-        List<Vertex> adjacentNodes = getAdjacentNodes(source);
-        for (Vertex newStart : adjacentNodes) {
+        List<Vertex> adjacentVertices = getAdjacentVertices(source);
+        for (Vertex newStart : adjacentVertices) {
             dijkstraAlgorithm.execute(newStart);
             if (dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(source) != null) {
                 LinkedList<Vertex> wholePath = dijkstraAlgorithm.getShortestPathDifferentStartAndEnd(source);
@@ -161,10 +161,10 @@ public class DijkstraAlgorithm {
     }
 
     public String getExactPath(LinkedList<Vertex> exactPath) {
-        for (Vertex node : exactPath) {
-            if (node.equals(exactPath.getLast())) {
+        for (Vertex vertex : exactPath) {
+            if (vertex.equals(exactPath.getLast())) {
                 break;
-            } else if (getDistance(node, exactPath.get(exactPath.indexOf(node) + 1)) == Integer.MAX_VALUE) {
+            } else if (getDistance(vertex, exactPath.get(exactPath.indexOf(vertex) + 1)) == Integer.MAX_VALUE) {
                 return "NO SUCH ROUTE";
             }
         }
@@ -173,48 +173,48 @@ public class DijkstraAlgorithm {
 
     public int getDistanceByPath(LinkedList<Vertex> path) {
         int distance = 0;
-        int nodeIndex = 0;
-        Vertex nextNode;
+        int vertexIndex = 0;
+        Vertex nextVertex;
         if (path.size() < 2) {
             return distance;
         }
-        for (Vertex node : path) {
-            nextNode = path.get(nodeIndex + 1);
-            distance += getDistance(node, nextNode);
-            nodeIndex += 1;
-            if (nodeIndex == path.size() - 1) {
+        for (Vertex vertex : path) {
+            nextVertex = path.get(vertexIndex + 1);
+            distance += getDistance(vertex, nextVertex);
+            vertexIndex += 1;
+            if (vertexIndex == path.size() - 1) {
                 return distance;
             }
         }
         return distance;
     }
 
-    public void getAllPathsWithExactStops(Vertex startNode, Vertex endNode, int stops) {
-        visitedList.add(startNode);
+    public void getAllPathsWithExactStops(Vertex startVertex, Vertex endVertex, int stops) {
+        visitedList.add(startVertex);
         for (Edge edge : graph.getEdges()) {
-            if (edge.getSource().equals(startNode)) {
-                if (edge.getDestination().equals(endNode) && visitedList.size() == stops) {
-                    resultPaths.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endNode + "]");
+            if (edge.getSource().equals(startVertex)) {
+                if (edge.getDestination().equals(endVertex) && visitedList.size() == stops) {
+                    resultPaths.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endVertex + "]");
                     continue;
                 }
                 if (visitedList.size() <= stops) {
-                    getAllPathsWithExactStops(edge.getDestination(), endNode, stops);
+                    getAllPathsWithExactStops(edge.getDestination(), endVertex, stops);
                 }
             }
         }
-        visitedList.remove(startNode);
+        visitedList.remove(startVertex);
     }
 
-    public void getAllPathsWithMaxDistance(Vertex startNode, Vertex endNode, int maxDistance) {
-        visitedList.add(startNode);
+    public void getAllPathsWithMaxDistance(Vertex startVertex, Vertex endVertex, int maxDistance) {
+        visitedList.add(startVertex);
         int distance = getDistanceByPath(visitedList);
         if (distance < maxDistance) {
             for (Edge edge : graph.getEdges()) {
-                if (edge.getSource().equals(startNode)) {
-                    if (edge.getDestination().equals(endNode) && distance + edge.getWeight() < maxDistance) {
-                        resultPaths.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endNode + "]");
+                if (edge.getSource().equals(startVertex)) {
+                    if (edge.getDestination().equals(endVertex) && distance + edge.getWeight() < maxDistance) {
+                        resultPaths.add(visitedList.toString().substring(0, visitedList.toString().lastIndexOf("]")) + ", " + endVertex + "]");
                     }
-                    getAllPathsWithMaxDistance(edge.getDestination(), endNode, maxDistance);
+                    getAllPathsWithMaxDistance(edge.getDestination(), endVertex, maxDistance);
                 }
             }
         }

@@ -14,9 +14,9 @@ public class Graph {
     }
 
     public Vertex getVertexInGraphById(String id) {
-        for (Vertex node : vertexes) {
-            if (node.getId().equals(id)) {
-                return node;
+        for (Vertex vertex : vertexes) {
+            if (vertex.getId().equals(id)) {
+                return vertex;
             }
         }
         return null;
