@@ -29,7 +29,7 @@ class GraphUtilTest {
     }
 
     @Test
-    void getVertexById() {
+    void shouldGetCorrectVertexById() {
         Vertex expectedVertex = new Vertex("A");
         Vertex vertex = graphUtil.getVertexById("A", nodes);
 
@@ -37,7 +37,7 @@ class GraphUtilTest {
     }
 
     @Test
-    void getLinkedVertexByStops() {
+    void shouldGetCorrectLinkedVertexByStops() {
         ArrayList<String> stops = new ArrayList<>();
         stops.add("A");
         stops.add("B");

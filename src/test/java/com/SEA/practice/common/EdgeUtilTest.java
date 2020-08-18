@@ -28,7 +28,7 @@ class EdgeUtilTest {
     }
 
     @Test
-    void generateEdge() {
+    void shouldGenerateCorrectEdge() {
         EdgeUtil edgeUtil = new EdgeUtil();
         GraphUtil graphUtil = new GraphUtil();
         Edge edge = edgeUtil.generateEdge("Edge_0", "A", "B", 5, nodes);
