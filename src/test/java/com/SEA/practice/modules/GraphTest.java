@@ -37,6 +37,6 @@ class GraphTest {
 
         assertEquals(graph.getEdges(), edges);
         assertEquals(graph.getVertexes(), nodes);
-        assertEquals(graph.getVertexById("A"), nodes.get(0));
+        assertEquals(graph.getVertexInGraphById("A"), nodes.get(0));
     }
 }
