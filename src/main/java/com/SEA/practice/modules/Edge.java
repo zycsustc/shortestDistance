@@ -1,6 +1,6 @@
 package com.SEA.practice.modules;
 
-public class Edge  {
+public class Edge {
     private final String id;
     private final Vertex source;
     private final Vertex destination;
@@ -16,6 +16,7 @@ public class Edge  {
     public String getId() {
         return id;
     }
+
     public Vertex getDestination() {
         return destination;
     }
@@ -23,6 +24,7 @@ public class Edge  {
     public Vertex getSource() {
         return source;
     }
+
     public int getWeight() {
         return weight;
     }

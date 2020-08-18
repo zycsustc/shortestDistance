@@ -14,7 +14,7 @@ public class ShortestPathController {
     @GetMapping("/shortestPath/{source}/{target}")
     public String getShortestPath(@PathVariable String source, @PathVariable String target) {
         LinkedList<Vertex> result = shortestPathService.getShortestPath(source, target);
-        return result==null ? "NO SUCH ROUTE" : result.toString();
+        return result == null ? "NO SUCH ROUTE" : result.toString();
     }
 
     @GetMapping("/shortestPath/stops/{condition}/{source}/{target}/{number}")
@@ -22,11 +22,11 @@ public class ShortestPathController {
             @PathVariable String condition, @PathVariable String number, @PathVariable String source, @PathVariable String target) {
         ArrayList<String> paths = shortestPathService.getPathsWithConditionOnStops(source, target, condition, Integer.parseInt(number));
         StringBuilder stringBuilder = new StringBuilder();
-        if(paths == null){
+        if (paths == null) {
             stringBuilder.append("NO SUCH ROUTE");
         } else {
-            for(String path: paths){
-                stringBuilder.append(path, 1, path.length()-1);
+            for (String path : paths) {
+                stringBuilder.append(path, 1, path.length() - 1);
                 stringBuilder.append(" / ");
             }
             stringBuilder.append(" There are totally ").append(paths.size()).append(" trips.");
@@ -43,11 +43,11 @@ public class ShortestPathController {
     public String getPathsWithMaxDistance(@PathVariable String source, @PathVariable String target, @PathVariable String maxDistance) {
         ArrayList<String> result = shortestPathService.getPathsWithMaxDistance(source, target, Integer.parseInt(maxDistance));
         StringBuilder stringBuilder = new StringBuilder();
-        if(result == null){
+        if (result == null) {
             stringBuilder.append("NO SUCH ROUTE");
         } else {
-            for(String path: result){
-                stringBuilder.append(path, 1, path.length()-1);
+            for (String path : result) {
+                stringBuilder.append(path, 1, path.length() - 1);
                 stringBuilder.append(" / ");
             }
             stringBuilder.append(" There are totally ").append(result.size()).append(" trips.");
