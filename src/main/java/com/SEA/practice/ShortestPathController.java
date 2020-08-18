@@ -36,7 +36,7 @@ public class ShortestPathController {
 
     @GetMapping("/shortestPath/exactPath/{pathStops}")
     public String getDistanceOfExactPath(@PathVariable String pathStops) {
-        return shortestPathService.getDistanceOfExactPath(Arrays.asList(pathStops.split("")));
+        return shortestPathService.getDistanceOfExactPath(new ArrayList<>(Arrays.asList(pathStops.split(""))));
     }
 
     @GetMapping(value = "/shortestPath/maxDistance/{source}/{target}/{maxDistance}")

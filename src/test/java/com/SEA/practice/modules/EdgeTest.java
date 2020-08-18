@@ -13,9 +13,9 @@ class EdgeTest {
         String id = "id";
         Edge edge = new Edge(id, source, target, weight);
 
-        assertEquals(edge.getWeight(), 5);
-        assertEquals(edge.getSource(), source);
-        assertEquals(edge.getDestination(), target);
-        assertEquals(edge.getId(), id);
+        assertEquals(weight, edge.getWeight());
+        assertEquals(source, edge.getSource());
+        assertEquals(target, edge.getDestination());
+        assertEquals(id, edge.getId());
     }
 }
