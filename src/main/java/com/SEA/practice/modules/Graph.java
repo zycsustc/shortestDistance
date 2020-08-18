@@ -12,7 +12,7 @@ public class Graph {
         this.edges = edges;
     }
 
-    public Vertex getVertexById(String id) {
+    public Vertex getVertexInGraphById(String id) {
         for (Vertex node : vertexes) {
             if (node.getId().equals(id)) {
                 return node;
@@ -21,10 +21,10 @@ public class Graph {
         return null;
     }
 
-    public LinkedList<Vertex> getLinkedVertexByStops(List<String> stops) {
+    public LinkedList<Vertex> getLinkedVertexByStopsInGraph(List<String> stops) {
         LinkedList<Vertex> path = new LinkedList<>();
         for(String stop: stops){
-            path.add(getVertexById(stop));
+            path.add(getVertexInGraphById(stop));
         }return path;
     }
 
