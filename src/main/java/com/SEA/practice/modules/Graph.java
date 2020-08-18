@@ -1,5 +1,6 @@
 package com.SEA.practice.modules;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,11 +22,12 @@ public class Graph {
         return null;
     }
 
-    public LinkedList<Vertex> getLinkedVertexByStopsInGraph(List<String> stops) {
+    public LinkedList<Vertex> getLinkedVertexByStopsInGraph(ArrayList<String> stops) {
         LinkedList<Vertex> path = new LinkedList<>();
-        for(String stop: stops){
+        for (String stop : stops) {
             path.add(getVertexInGraphById(stop));
-        }return path;
+        }
+        return path;
     }
 
     public List<Vertex> getVertexes() {
