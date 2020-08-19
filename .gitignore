@@ -9,8 +9,9 @@
 /coverage
 
 # production
-/build
-/.gradle
+build/
+.gradle/
+.idea/
 
 # misc
 .DS_Store
