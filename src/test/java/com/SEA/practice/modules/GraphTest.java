@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,6 @@ class GraphTest {
 
         edges.add(new Edge("Edge_0", vertexA, vertexB, 5));
         edges.add(new Edge("Edge_1", vertexB, vertexC, 6));
-
     }
 
     @Test
@@ -35,5 +35,30 @@ class GraphTest {
 
         assertEquals(edges, graph.getEdges());
         assertEquals(vertices, graph.getVertexes());
+    }
+
+    @Test
+    void shouldGetCorrectVertexInGraphById() {
+        Graph graph = new Graph(vertices, edges);
+
+        Vertex vertexFromGraph = graph.getVertexInGraphById("A");
+
+        assertEquals(vertices.get(0), vertexFromGraph);
+    }
+
+    @Test
+    void shouldGetCorrectLinkedVertexByStopsInGraph() {
+        Graph graph = new Graph(vertices, edges);
+
+        ArrayList<String> stopsIdList = new ArrayList<>();
+        stopsIdList.add("A");
+        stopsIdList.add("B");
+        stopsIdList.add("C");
+
+        LinkedList<Vertex> path = graph.getLinkedVertexByStopsInGraph(stopsIdList);
+
+        assertEquals(vertices.get(0), path.get(0));
+        assertEquals(vertices.get(1), path.get(1));
+        assertEquals(vertices.get(2), path.get(2));
     }
 }
